@@ -14,7 +14,6 @@ app.use(express.json())
 app.get('/api/notes', (req, res) => {
     console.log(db)
     res.json(db)
-    res.status(200).send('notes loaded')
 })
 
 app.post('/api/notes', (req, res) => {
@@ -40,6 +39,19 @@ app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/notes.html'))
 })
 
+app.delete('/api/notes/:id', (req, res) => {
+    console.log(db)
+    const noteId = req.params.id;
+    if (noteId) {
+        const filteredDb = db.filter(note => note.id != noteId)
+        db = filteredDb
+        const stringDb = JSON.stringify(db);
+        console.log(db)
+        fs.writeFileSync('./db/db.json', stringDb)
+        
+        res.status(200).send(`Deleted note ${noteId}`)
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Server started and ready at http://localhost:${PORT}`);

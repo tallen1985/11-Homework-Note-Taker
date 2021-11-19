@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path')
 
 const app = express();
-const PORT = 3001;
+const PORT = 80;
 const rawData = fs.readFileSync('./db/db.json', 'utf8')
     let db = JSON.parse(rawData)
 

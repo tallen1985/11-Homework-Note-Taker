@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
 app.get('/api/notes', (req, res) => {
-    console.log(db)
     res.json(db)
 })
 
@@ -40,7 +39,6 @@ app.get('/notes', (req, res) => {
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-    console.log(db)
     const noteId = req.params.id;
     if (noteId) {
         const filteredDb = db.filter(note => note.id != noteId)
